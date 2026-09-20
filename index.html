@@ -136,17 +136,17 @@
   /* ---------- nav ---------- */
   #topline{display:none;}
   header{position:fixed;top:0;left:0;right:0;z-index:110;padding:20px 0;background:var(--color-paper-white);border-bottom:1px solid var(--line);}
-  header .wrap{display:flex;align-items:center;justify-content:space-between;}
+  header .wrap{display:flex;align-items:center;}
   header.scrolled{padding:16px 0;}
   .brand{display:flex;align-items:center;font-family:var(--font-sans);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--color-carbon-ink);text-decoration:none;}
-  nav.mainnav{display:flex;align-items:center;gap:30px;}
+  nav.mainnav{display:flex;align-items:center;gap:30px;flex:1;margin-left:48px;}
   nav.mainnav a{font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:0;color:var(--color-carbon-ink);text-decoration:none;padding:6px 0;position:relative;}
   nav.mainnav a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--color-carbon-ink);transform:scaleX(0);transform-origin:left;transition:transform .2s ease;}
   nav.mainnav a:hover,nav.mainnav a.active{color:var(--color-carbon-ink);}
   nav.mainnav a.active::after{transform:scaleX(1);}
   nav.mainnav a.navcta{font-family:var(--font-sans);font-weight:500;font-size:16px;color:var(--color-paper-white);background:var(--color-carbon-ink);padding:14px 24px;border-radius:var(--radius-buttons);text-decoration:none;white-space:nowrap;border:none;}
-  nav.mainnav a.langswitch{font-family:var(--font-sans);font-weight:500;font-size:14px;color:var(--color-carbon-ink);text-decoration:none;padding:9px 14px;border:1px solid var(--color-carbon-ink);border-radius:var(--radius-links);}
-  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;}
+  nav.mainnav a.langswitch{font-family:var(--font-sans);font-weight:500;font-size:14px;color:var(--color-carbon-ink);text-decoration:none;padding:9px 14px;border:1px solid var(--color-carbon-ink);border-radius:var(--radius-links);margin-left:auto;}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto;}
   .burger span{width:22px;height:1.5px;background:var(--color-carbon-ink);}
   #mobilenav{display:none;}
 
