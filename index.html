@@ -138,15 +138,14 @@
   header{position:fixed;top:0;left:0;right:0;z-index:110;padding:20px 0;background:var(--color-paper-white);border-bottom:1px solid var(--line);}
   header .wrap{display:flex;align-items:center;justify-content:space-between;}
   header.scrolled{padding:16px 0;}
-  .brand{display:flex;align-items:center;gap:9px;font-family:var(--font-sans);font-weight:700;font-size:16px;letter-spacing:0;color:var(--color-carbon-ink);text-decoration:none;}
-  .brand .mark{color:var(--color-carbon-ink);font-size:15px;}
+  .brand{display:flex;align-items:center;font-family:var(--font-sans);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--color-carbon-ink);text-decoration:none;}
   nav.mainnav{display:flex;align-items:center;gap:30px;}
   nav.mainnav a{font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:0;color:var(--color-carbon-ink);text-decoration:none;padding:6px 0;position:relative;}
   nav.mainnav a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--color-carbon-ink);transform:scaleX(0);transform-origin:left;transition:transform .2s ease;}
   nav.mainnav a:hover,nav.mainnav a.active{color:var(--color-carbon-ink);}
   nav.mainnav a.active::after{transform:scaleX(1);}
-  .navcta{font-family:var(--font-sans);font-weight:500;font-size:16px;color:var(--color-paper-white);background:var(--color-carbon-ink);padding:14px 24px;border-radius:var(--radius-buttons);text-decoration:none;white-space:nowrap;border:none;}
-  .langswitch{font-family:var(--font-sans);font-weight:500;font-size:14px;color:var(--color-carbon-ink);text-decoration:none;padding:6px 10px;border:1px solid var(--line);border-radius:var(--radius-links);}
+  nav.mainnav a.navcta{font-family:var(--font-sans);font-weight:500;font-size:16px;color:var(--color-paper-white);background:var(--color-carbon-ink);padding:14px 24px;border-radius:var(--radius-buttons);text-decoration:none;white-space:nowrap;border:none;}
+  nav.mainnav a.langswitch{font-family:var(--font-sans);font-weight:500;font-size:14px;color:var(--color-carbon-ink);text-decoration:none;padding:9px 14px;border:1px solid var(--color-carbon-ink);border-radius:var(--radius-links);}
   .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;}
   .burger span{width:22px;height:1.5px;background:var(--color-carbon-ink);}
   #mobilenav{display:none;}
@@ -157,9 +156,9 @@
   section.on-dark{background:var(--color-carbon-ink);color:var(--color-paper-white);}
   section.on-dusk{background:var(--color-carbon-ink);color:var(--color-paper-white);}
   section.on-paper2{background:var(--color-newsprint-gray);}
-  h2.h2{font-size:clamp(28px,3.6vw,48px);line-height:1.18;letter-spacing:-.02em;margin-top:12px;text-align:center;}
+  h2.h2{font-size:clamp(28px,3.6vw,48px);line-height:1.18;letter-spacing:-.02em;margin-top:12px;text-align:left;}
   section.on-dark h2.h2{color:var(--color-paper-white);}
-  .lede{font-style:normal;font-size:18px;line-height:1.56;color:var(--color-fog);max-width:640px;margin-top:22px;margin-left:auto;margin-right:auto;text-align:center;}
+  .lede{font-style:normal;font-size:18px;line-height:1.56;color:var(--color-fog);max-width:640px;margin-top:22px;text-align:left;}
   section.on-dark .lede{color:rgba(255,255,255,.72);}
   .lede.center{margin-left:auto;margin-right:auto;text-align:center;}
   section.editorial-center .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;}
@@ -171,7 +170,7 @@
   #hero .bg{display:none;}
   #hero .veil{display:none;}
   #hero .hcontent{position:relative;padding:0 32px;max-width:800px;margin:0 auto;width:100%;text-align:center;}
-  #hero .brandline{display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:0;color:var(--color-fog);text-transform:uppercase;margin-bottom:24px;}
+  #hero .brandline{text-align:center;font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:.02em;color:var(--color-fog);text-transform:uppercase;margin-bottom:24px;}
   #hero h1{font-size:clamp(40px,7vw,72px);line-height:1.13;letter-spacing:-.03em;font-weight:700;}
   #hero .sub{font-style:normal;font-size:18px;color:var(--color-fog);max-width:640px;margin:22px auto 0;line-height:1.56;text-align:center;}
   #hero .ctarow{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;justify-content:center;}
@@ -190,7 +189,7 @@
   section.on-dark .card,section.on-dusk .card{background:rgba(255,255,255,.06);border-color:var(--line-on-dark);}
   .card h3{font-size:18px;color:var(--color-carbon-ink);font-weight:700;}
   section.on-dark .card h3,section.on-dusk .card h3{color:var(--color-paper-white);}
-  .card h3 .num{font-family:var(--font-sans);color:var(--color-fog);font-size:13px;margin-right:8px;font-weight:500;}
+  .card h3 .num{font-family:var(--font-sans);color:var(--color-fog);font-size:18px;margin-right:8px;font-weight:500;}
   .card p{font-size:16px;line-height:1.56;color:var(--color-fog);margin-top:11px;}
   section.on-dark .card p,section.on-dusk .card p{color:rgba(255,255,255,.7);}
 
@@ -248,7 +247,7 @@
   #calm .flam .veil{display:none;}
   #calm .flamtext{position:relative;inset:auto;display:block;padding:var(--spacing-64) 32px;text-align:center;}
   #calm .flamtext .wrap{width:100%;}
-  #calm .flamtext .eyebrow,#calm .flamtext h2,#calm .flamtext .lede{text-shadow:none;}
+  #calm .flamtext .eyebrow,#calm .flamtext h2,#calm .flamtext .lede{text-shadow:none;text-align:center;}
   #calm .formula{margin:28px auto 0;font-style:normal;font-size:clamp(16px,2.2vw,22px);color:var(--color-carbon-ink);display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center;text-shadow:none;}
   #calm .formula span{white-space:nowrap;}
   #calm .formula .arrow{color:var(--color-fog);}
@@ -318,7 +317,7 @@
   .insure-bar .insure-note{display:inline-block;margin-top:8px;font-family:var(--font-sans);font-weight:500;font-size:14px;color:var(--color-fog);}
   section.on-dark .insure-bar .insure-note,section.on-dusk .insure-bar .insure-note{color:rgba(255,255,255,.65);}
   .mini-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;}
-  .disclaimer{margin-top:20px;background:var(--color-newsprint-gray);border:1px solid var(--color-carbon-ink);border-left:4px solid var(--color-carbon-ink);border-radius:var(--radius-media);padding:18px 22px;display:flex;gap:13px;align-items:flex-start;}
+  .disclaimer{margin-top:20px;background:var(--color-newsprint-gray);border:1px solid var(--color-carbon-ink);border-left:4px solid var(--color-carbon-ink);border-radius:var(--radius-media);padding:18px 22px;display:flex;gap:13px;align-items:center;}
   .disclaimer .tri{color:var(--color-carbon-ink);font-size:19px;}
   .disclaimer p{color:var(--color-carbon-ink);font-size:14px;line-height:1.55;}
   .disclaimer p b{color:var(--color-carbon-ink);}
@@ -392,6 +391,7 @@
   #mobilenav{position:fixed;inset:0;background:var(--color-carbon-ink);z-index:130;flex-direction:column;padding:26px 28px;gap:2px;}
   #mobilenav a{font-family:var(--font-sans);font-weight:500;font-size:16px;letter-spacing:0;color:var(--color-paper-white);text-decoration:none;padding:16px 4px;border-bottom:1px solid var(--line-on-dark);}
   #mobilenav .mnav-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+  #mobilenav .mnav-top .brand{color:var(--color-paper-white);}
   #mnav-close{background:none;border:none;color:var(--color-paper-white);font-size:22px;cursor:pointer;}
 </style>
 </head>
@@ -401,7 +401,7 @@
 
 <header id="siteheader">
   <div class="wrap">
-    <a href="#hero" class="brand"><span class="mark">★</span>Namib Passage</a>
+    <a href="#hero" class="brand">Namib Passage</a>
     <nav class="mainnav" id="mainnav">
       <a href="#context" data-nav>Контекст</a>
       <a href="#safety" data-nav>Безопасность</a>
@@ -419,7 +419,7 @@
 </header>
 
 <div id="mobilenav">
-  <div class="mnav-top"><span class="brand"><span class="mark">★</span>Namib Passage</span><button id="mnav-close" aria-label="Закрыть">✕</button></div>
+  <div class="mnav-top"><span class="brand">Namib Passage</span><button id="mnav-close" aria-label="Закрыть">✕</button></div>
   <a href="#context">Контекст</a>
   <a href="#safety">Безопасность</a>
   <a href="#capital">Капитал</a>
@@ -436,7 +436,7 @@
 <!-- ============ HERO ============ -->
 <section id="hero">
   <div class="hcontent">
-    <div class="brandline"><span class="mark">★</span>Резидентство · Капитал · Спокойствие</div>
+    <div class="brandline">Резидентство · Капитал · Спокойствие</div>
     <h1>Намибия —<br>тихая гавань</h1>
     <p class="sub">Страна, где безопасность — не лозунг, а образ жизни; где капитал защищён стабильностью, а не обещаниями.</p>
     <div class="ctarow">
@@ -453,7 +453,7 @@
 <!-- ============ CONTEXT ============ -->
 <section id="context">
   <div class="wrap">
-    <div class="reveal"><div class="eyebrow">Контекст</div><h2 class="h2">Почему Намибия — именно сейчас</h2><div class="rule"></div></div>
+    <div class="reveal"><div class="eyebrow">Контекст</div><h2 class="h2">Почему Намибия — Именно сейчас</h2><div class="rule"></div></div>
     <div class="split">
       <div class="reveal">
         <p class="lede" style="font-style:normal;">Мир вошёл в фазу турбулентности: геополитические сдвиги, валютная нестабильность, непредсказуемость правил игры в привычных юрисдикциях. На этом фоне растёт запрос на тихие, устойчивые места — не для бегства, а для трезвого распределения рисков.</p>
@@ -596,7 +596,7 @@
     <div class="wrap reveal">
       <div class="eyebrow">04 · Фокус на спокойствие</div>
       <h2 class="h2">Спокойствие в неспокойные времена</h2>
-      <p class="lede" style="max-width:600px;">Намибия — одна из наименее плотно населённых стран мира: около 3 человек на квадратный километр. Пространство превращается в психологический ресурс — расстояние от шума, спешки и чужой тревожности.</p>
+      <p class="lede center" style="max-width:600px;">Намибия — одна из наименее плотно населённых стран мира: около 3 человек на квадратный километр. Пространство превращается в психологический ресурс — расстояние от шума, спешки и чужой тревожности.</p>
       <div class="formula"><span>Меньше шума</span><span class="arrow">→</span><span>яснее решения</span><span class="arrow">→</span><span>надёжнее капитал</span><span class="arrow">→</span><span>спокойнее жизнь</span></div>
     </div>
   </div>
@@ -695,7 +695,7 @@
 <!-- ============ TOURS ============ -->
 <section id="tours">
   <div class="wrap">
-    <div class="reveal"><div class="eyebrow">Готовые маршруты</div><h2 class="h2">5 маршрутов по Намибии — на выбор</h2><div class="rule"></div>
+    <div class="reveal"><div class="eyebrow">Готовые маршруты</div><h2 class="h2">5 маршрутов по Намибии — На выбор</h2><div class="rule"></div>
       <p class="lede" style="font-style:normal;">От компактной ознакомительной поездки до полного luxury-путешествия с каньоном Фиш-Ривер и Берегом Скелетов — партнёрские туры ZonaSur Travel, которые мы включаем в сопровождение резидентства. Откройте программу по дням, чтобы увидеть маршрут целиком.</p>
     </div>
 
