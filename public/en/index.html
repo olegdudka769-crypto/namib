@@ -129,9 +129,15 @@
   section.on-dark .rule{background:rgba(255,255,255,.4);}
 
   /* ---------- reveal-on-scroll ---------- */
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
-  .reveal.in-view{opacity:1;transform:translateY(0);}
+  /* hidden state only applies once JS confirms it can reveal the content again (html.js, set at
+     the top of the page script) — without JS, .reveal content is visible by default */
+  .reveal{transition:opacity .5s ease, transform .5s ease;}
+  html.js .reveal{opacity:0;transform:translateY(14px);}
+  html.js .reveal.in-view{opacity:1;transform:translateY(0);}
   .reveal-stagger > *{transition-delay:calc(var(--i,0) * 80ms);}
+  @media (prefers-reduced-motion:reduce){
+    html.js .reveal{opacity:1;transform:none;}
+  }
 
   /* ---------- nav ---------- */
   #topline{display:none;}
@@ -764,10 +770,10 @@
       <p class="lede" style="font-style:normal;">From a compact exploratory trip to a full luxury journey with Fish River Canyon and the Skeleton Coast — partner tours by ZonaSur Travel that we build into your residency support. Open the day-by-day programme to see the full route.</p>
     </div>
 
-    <div class="tours-list reveal">
+    <div class="tours-list reveal-stagger">
 
       <!-- Tour 1 — Classic Namibia -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:0">
         <div class="tour-head">
           <div>
             <h3>Classic Namibia</h3>
@@ -825,7 +831,7 @@
       </div>
 
       <!-- Tour 2 — Landscapes of Namibia, 6 days -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:1">
         <div class="tour-head">
           <div>
             <h3>Landscapes of Namibia — 6 days</h3>
@@ -881,7 +887,7 @@
       </div>
 
       <!-- Tour 3 — Landscapes of Namibia, 8 days -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:2">
         <div class="tour-head">
           <div>
             <h3>Landscapes of Namibia — 8 days</h3>
@@ -938,7 +944,7 @@
       </div>
 
       <!-- Tour 4 — Southern Parks Luxury -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:3">
         <div class="tour-head">
           <div>
             <h3>Southern Parks — Luxury with Fish River</h3>
@@ -995,7 +1001,7 @@
       </div>
 
       <!-- Tour 5 — Spaces and Horizons -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:4">
         <div class="tour-head">
           <div>
             <h3>Spaces and Horizons — the grand tour</h3>
@@ -1262,6 +1268,7 @@
 <script>
 (function(){
   "use strict";
+  document.documentElement.classList.add('js');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* header scroll state + topline progress */
@@ -1363,14 +1370,14 @@
 
   /* reveal on scroll */
   var revealEls = document.querySelectorAll('.reveal');
-  if(reduceMotion){
+  if(reduceMotion || typeof IntersectionObserver === 'undefined'){
     revealEls.forEach(function(el){ el.classList.add('in-view'); });
   } else {
     var ro = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting){ e.target.classList.add('in-view'); ro.unobserve(e.target); }
       });
-    }, {threshold:.12});
+    }, {threshold:0, rootMargin:'0px 0px -10% 0px'});
     revealEls.forEach(function(el){ ro.observe(el); });
   }
 

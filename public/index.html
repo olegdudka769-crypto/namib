@@ -129,9 +129,15 @@
   section.on-dark .rule{background:rgba(255,255,255,.4);}
 
   /* ---------- reveal-on-scroll ---------- */
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease;}
-  .reveal.in-view{opacity:1;transform:translateY(0);}
+  /* hidden state only applies once JS confirms it can reveal the content again (html.js, set at
+     the top of the page script) — without JS, .reveal content is visible by default */
+  .reveal{transition:opacity .5s ease, transform .5s ease;}
+  html.js .reveal{opacity:0;transform:translateY(14px);}
+  html.js .reveal.in-view{opacity:1;transform:translateY(0);}
   .reveal-stagger > *{transition-delay:calc(var(--i,0) * 80ms);}
+  @media (prefers-reduced-motion:reduce){
+    html.js .reveal{opacity:1;transform:none;}
+  }
 
   /* ---------- nav ---------- */
   #topline{display:none;}
@@ -764,10 +770,10 @@
       <p class="lede" style="font-style:normal;">От компактной ознакомительной поездки до полного luxury-путешествия с каньоном Фиш-Ривер и Берегом Скелетов — партнёрские туры ZonaSur Travel, которые мы включаем в сопровождение резидентства. Откройте программу по дням, чтобы увидеть маршрут целиком.</p>
     </div>
 
-    <div class="tours-list reveal">
+    <div class="tours-list reveal-stagger">
 
       <!-- Tour 1 — Классика Намибии -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:0">
         <div class="tour-head">
           <div>
             <h3>Классика Намибии</h3>
@@ -825,7 +831,7 @@
       </div>
 
       <!-- Tour 2 — Ландшафты Намибии, 6 дней -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:1">
         <div class="tour-head">
           <div>
             <h3>Ландшафты Намибии — 6 дней</h3>
@@ -881,7 +887,7 @@
       </div>
 
       <!-- Tour 3 — Ландшафты Намибии, 8 дней -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:2">
         <div class="tour-head">
           <div>
             <h3>Ландшафты Намибии — 8 дней</h3>
@@ -938,7 +944,7 @@
       </div>
 
       <!-- Tour 4 — Южные Парки Luxury -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:3">
         <div class="tour-head">
           <div>
             <h3>Южные Парки — Luxury с Фиш-Ривер</h3>
@@ -995,7 +1001,7 @@
       </div>
 
       <!-- Tour 5 — Пространства и Горизонты -->
-      <div class="tour-card">
+      <div class="tour-card reveal" style="--i:4">
         <div class="tour-head">
           <div>
             <h3>Пространства и Горизонты — большой тур</h3>
@@ -1262,6 +1268,7 @@
 <script>
 (function(){
   "use strict";
+  document.documentElement.classList.add('js');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* header scroll state + topline progress */
@@ -1363,14 +1370,14 @@
 
   /* reveal on scroll */
   var revealEls = document.querySelectorAll('.reveal');
-  if(reduceMotion){
+  if(reduceMotion || typeof IntersectionObserver === 'undefined'){
     revealEls.forEach(function(el){ el.classList.add('in-view'); });
   } else {
     var ro = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting){ e.target.classList.add('in-view'); ro.unobserve(e.target); }
       });
-    }, {threshold:.12});
+    }, {threshold:0, rootMargin:'0px 0px -10% 0px'});
     revealEls.forEach(function(el){ ro.observe(el); });
   }
 
