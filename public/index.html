@@ -135,19 +135,25 @@
 
   /* ---------- nav ---------- */
   #topline{display:none;}
-  header{position:fixed;top:0;left:0;right:0;z-index:110;padding:20px 0;background:var(--color-paper-white);border-bottom:1px solid var(--line);}
+  header{position:fixed;top:0;left:0;right:0;z-index:110;padding:20px 0;background:var(--color-paper-white);border-bottom:1px solid var(--line);transition:background .25s ease,border-color .25s ease;}
   header .wrap{display:flex;align-items:center;}
   header.scrolled{padding:16px 0;}
+  header.on-hero{background:transparent;border-bottom-color:transparent;}
   .brand{display:flex;align-items:center;font-family:var(--font-sans);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--color-carbon-ink);text-decoration:none;}
+  header.on-hero .brand{color:#fff;}
   nav.mainnav{display:flex;align-items:center;gap:30px;flex:1;margin-left:48px;}
   nav.mainnav a{font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:0;color:var(--color-carbon-ink);text-decoration:none;padding:6px 0;position:relative;}
   nav.mainnav a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--color-carbon-ink);transform:scaleX(0);transform-origin:left;transition:transform .2s ease;}
   nav.mainnav a:hover,nav.mainnav a.active{color:var(--color-carbon-ink);}
   nav.mainnav a.active::after{transform:scaleX(1);}
+  header.on-hero nav.mainnav a:not(.navcta){color:#fff;}
+  header.on-hero nav.mainnav a::after{background:#fff;}
   nav.mainnav a.navcta{font-family:var(--font-sans);font-weight:500;font-size:16px;color:var(--color-paper-white);background:var(--color-carbon-ink);padding:14px 24px;border-radius:var(--radius-buttons);text-decoration:none;white-space:nowrap;border:none;}
   nav.mainnav a.langswitch{font-family:var(--font-sans);font-weight:500;font-size:14px;color:var(--color-carbon-ink);text-decoration:none;padding:9px 14px;border:1px solid var(--color-carbon-ink);border-radius:var(--radius-links);margin-left:auto;}
+  header.on-hero nav.mainnav a.langswitch{color:#fff;border-color:rgba(255,255,255,.6);}
   .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto;}
   .burger span{width:22px;height:1.5px;background:var(--color-carbon-ink);}
+  header.on-hero .burger span{background:#fff;}
   #mobilenav{display:none;}
 
   /* ---------- sections generic ---------- */
@@ -164,22 +170,32 @@
   section.editorial-center .wrap{display:flex;flex-direction:column;align-items:center;text-align:center;}
   section.editorial-center .eyebrow,section.editorial-center .rule{margin-left:auto;margin-right:auto;}
 
-  /* ---------- hero (Airbnb hero is text-first; photo follows as a media block) ---------- */
-  #hero{min-height:auto;padding:calc(var(--spacing-96) + 64px) 0 var(--spacing-64);display:block;color:var(--color-carbon-ink);overflow:visible;background:var(--color-paper-white);}
-  #hero .bgwrap{display:none;}
+  /* ---------- hero (video background, top-aligned content) ---------- */
+  #hero{position:relative;min-height:100svh;padding:0;display:flex;align-items:flex-start;justify-content:center;color:var(--color-carbon-ink);overflow:hidden;background:#0c0a08;}
   #hero .bg{display:none;}
   #hero .veil{display:none;}
-  #hero .hcontent{position:relative;padding:0 32px;max-width:800px;margin:0 auto;width:100%;text-align:center;}
-  #hero .brandline{text-align:center;font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:.02em;color:var(--color-fog);text-transform:uppercase;margin-bottom:24px;}
-  #hero h1{font-size:clamp(40px,7vw,72px);line-height:1.13;letter-spacing:-.03em;font-weight:700;}
-  #hero .sub{font-style:normal;font-size:18px;color:var(--color-fog);max-width:640px;margin:22px auto 0;line-height:1.56;text-align:center;}
+  #hero .hero-media{position:absolute;inset:0;overflow:hidden;z-index:0;}
+  #hero .hero-media video,#hero .hero-media .hero-poster-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;}
+  #hero .hero-poster-fallback{display:none;}
+  @media (prefers-reduced-motion:reduce){
+    #hero .hero-media video{display:none;}
+    #hero .hero-poster-fallback{display:block;}
+  }
+  #hero .hero-overlay{position:absolute;inset:0;z-index:1;pointer-events:none;}
+  #hero .hero-overlay-1{background:linear-gradient(180deg, rgba(12,10,8,.55) 0%, rgba(12,10,8,.55) 50%, rgba(12,10,8,.75) 100%);}
+  #hero .hero-overlay-2{background:radial-gradient(ellipse 60% 55% at 50% 30%, rgba(12,10,8,.55), transparent 70%);}
+  #hero .hcontent{position:relative;z-index:2;padding:12vh 32px 64px;max-width:800px;margin:0 auto;width:100%;text-align:center;}
+  #hero .brandline{text-align:center;font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:.02em;color:rgba(255,255,255,.82);text-transform:uppercase;margin-bottom:24px;}
+  #hero h1{font-size:clamp(40px,7vw,72px);line-height:1.13;letter-spacing:-.03em;font-weight:700;color:#fff;text-shadow:0 1px 24px rgba(0,0,0,.35);}
+  #hero .sub{font-style:normal;font-size:18px;color:rgba(255,255,255,.82);max-width:640px;margin:22px auto 0;line-height:1.56;text-align:center;}
   #hero .ctarow{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap;justify-content:center;}
-  #hero .heroimg{margin:var(--spacing-64) auto 0;max-width:var(--maxw);border-radius:var(--radius-media);overflow:hidden;border:1px solid var(--color-carbon-ink);}
-  #hero .heroimg img{width:100%;height:520px;object-fit:cover;}
+  #hero .btn-solid{background:#fff;color:#1a1a1a;}
+  #hero .btn-ghost{background:transparent;border-color:#fff;color:#fff;}
+  #hero .btn-ghost:hover{background:rgba(255,255,255,.12);}
   .btn{font-family:var(--font-sans);font-weight:500;font-size:16px;letter-spacing:0;text-transform:none;padding:14px 24px;border-radius:var(--radius-buttons);text-decoration:none;display:inline-flex;align-items:center;gap:9px;border:1px solid transparent;}
   .btn-solid{background:var(--color-carbon-ink);color:var(--color-paper-white);}
   .btn-ghost{border-color:var(--color-carbon-ink);color:var(--color-carbon-ink);}
-  #hero .quoteline{margin-top:var(--spacing-48);padding-top:22px;border-top:1px solid var(--line);font-style:normal;color:var(--color-fog);font-size:14.5px;max-width:520px;margin-left:auto;margin-right:auto;text-align:center;}
+  #hero .quoteline{margin-top:var(--spacing-48);padding-top:22px;border-top:1px solid rgba(255,255,255,.25);font-style:normal;color:rgba(255,255,255,.82);font-size:14.5px;max-width:520px;margin-left:auto;margin-right:auto;text-align:center;}
   .scrollcue{display:none;}
 
   /* ---------- pillars / cards ---------- */
@@ -454,6 +470,14 @@
 
 <!-- ============ HERO ============ -->
 <section id="hero">
+  <div class="hero-media">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="/video/hero-poster.webp">
+      <source src="/video/hero.mp4" type="video/mp4">
+    </video>
+    <img class="hero-poster-fallback" src="/video/hero-poster.webp" alt="" loading="eager">
+    <div class="hero-overlay hero-overlay-1"></div>
+    <div class="hero-overlay hero-overlay-2"></div>
+  </div>
   <div class="hcontent">
     <div class="brandline">Резидентство · Капитал · Спокойствие</div>
     <h1>Намибия —<br>тихая гавань</h1>
@@ -463,9 +487,6 @@
       <a href="#cta" class="btn btn-ghost">Связаться с нами</a>
     </div>
     <div class="quoteline">«First travel, then decide» — сначала увидеть своими глазами, затем принять решение</div>
-  </div>
-  <div class="heroimg reveal">
-    <picture><source type="image/webp" srcset="/images/hero-bg-windhoek-night.webp"><img src="/images/hero-bg-windhoek-night.jpg" alt="Виндхук на закате" loading="eager"></picture>
   </div>
 </section>
 
@@ -1221,9 +1242,14 @@
   /* header scroll state + topline progress */
   var header = document.getElementById('siteheader');
   var topline = document.getElementById('topline');
+  var heroEl = document.getElementById('hero');
   function onScroll(){
     var y = window.scrollY || document.documentElement.scrollTop;
     header.classList.toggle('scrolled', y > 40);
+    if (heroEl) {
+      var heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
+      header.classList.toggle('on-hero', y < heroBottom - header.offsetHeight);
+    }
     var h = document.documentElement.scrollHeight - window.innerHeight;
     topline.style.width = (h > 0 ? Math.min(100, (y / h) * 100) : 0) + '%';
     document.getElementById('totop').classList.toggle('show', y > window.innerHeight * 0.8);
