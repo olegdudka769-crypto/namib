@@ -259,7 +259,7 @@
   /* ---------- calm / flamingo band — pure media block, text lives in its own section ---------- */
   #calm{padding:0;background:var(--color-newsprint-gray);}
   #calm .flam{position:relative;height:60vh;min-height:380px;overflow:hidden;border-top:1px solid var(--color-carbon-ink);border-bottom:1px solid var(--color-carbon-ink);}
-  #calm .flam img{width:100%;height:100%;object-fit:cover;}
+  #calm .flam video{width:100%;height:100%;object-fit:cover;object-position:center 45%;}
   #calm .flam .veil{display:none;}
   #calm .flamtext{position:relative;inset:auto;display:block;padding:var(--spacing-64) 32px;text-align:center;}
   #calm .flamtext .wrap{width:100%;}
@@ -641,7 +641,7 @@
     </div>
   </div>
   <div class="flam">
-    <img src="/images/flamingo-atlanticheskoe-poberezhe-namibii.jpg" alt="Flamingos on Namibia's Atlantic coast" loading="lazy">
+    <video class="flam-video lazy-video" muted loop playsinline preload="none" poster="/video/flamingos-poster.webp" aria-hidden="true" data-src="/video/flamingos.mp4"></video>
   </div>
   <div class="below">
     <div class="wrap">
@@ -1276,6 +1276,23 @@
     });
   }, {rootMargin:'-45% 0px -50% 0px'});
   sections.forEach(function(s){ spy.observe(s); });
+
+  /* lazy background video: load + play only while in view, pause when off-screen */
+  var lazyVideos = document.querySelectorAll('.lazy-video');
+  if(!reduceMotion && lazyVideos.length){
+    var lv = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var v = e.target;
+        if(e.isIntersecting){
+          if(!v.src && v.dataset.src){ v.src = v.dataset.src; v.load(); }
+          v.play().catch(function(){});
+        } else {
+          v.pause();
+        }
+      });
+    }, {threshold:.1});
+    lazyVideos.forEach(function(v){ lv.observe(v); });
+  }
 
   /* reveal on scroll */
   var revealEls = document.querySelectorAll('.reveal');
