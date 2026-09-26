@@ -360,6 +360,25 @@
   .cbtn.primary{background:var(--color-carbon-ink);color:var(--color-paper-white);border-color:var(--color-carbon-ink);}
   .fine{margin:26px auto 0;font-size:14px;color:var(--color-fog);line-height:1.56;max-width:640px;}
 
+  /* ---------- lead form ---------- */
+  .leadform-wrap{margin:40px auto 0;max-width:560px;text-align:left;}
+  .leadform-wrap .divider-or{display:flex;align-items:center;gap:14px;margin:0 0 26px;color:var(--color-ash);font-size:13px;text-transform:uppercase;letter-spacing:.04em;}
+  .leadform-wrap .divider-or::before,.leadform-wrap .divider-or::after{content:'';flex:1;height:1px;background:var(--line);}
+  .leadform{display:flex;flex-direction:column;gap:14px;}
+  .leadform .field{display:flex;flex-direction:column;gap:6px;}
+  .leadform label{font-family:var(--font-sans);font-size:13px;font-weight:500;color:var(--color-fog);}
+  .leadform input[type=text],.leadform input[type=email],.leadform input[type=tel],.leadform textarea{font-family:var(--font-sans);font-size:16px;font-weight:500;color:var(--color-carbon-ink);background:var(--color-paper-white);border:1px solid var(--line);border-radius:var(--radius-buttons);padding:13px 16px;width:100%;}
+  .leadform textarea{resize:vertical;min-height:96px;}
+  .leadform input:focus,.leadform textarea:focus{outline:none;border-color:var(--color-carbon-ink);}
+  .leadform .hp-field{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;}
+  .leadform .consent{display:flex;align-items:flex-start;gap:10px;font-family:var(--font-sans);font-size:14px;font-weight:500;color:var(--color-fog);line-height:1.5;}
+  .leadform .consent input{margin-top:3px;}
+  .leadform .consent a{text-decoration:underline;color:var(--color-carbon-ink);}
+  .leadform .cf-turnstile{margin-top:2px;}
+  .leadform .submit-btn{align-self:flex-start;font-family:var(--font-sans);font-weight:500;font-size:16px;color:var(--color-paper-white);background:var(--color-carbon-ink);border:none;padding:14px 28px;border-radius:var(--radius-buttons);cursor:pointer;}
+  .leadform .submit-btn:hover{opacity:.9;}
+  .leadform .form-note{font-family:var(--font-sans);font-size:13px;color:var(--color-ash);margin:0;}
+
   footer{background:var(--color-carbon-ink);color:rgba(255,255,255,.6);padding:var(--spacing-32) 0;font-family:var(--font-sans);font-weight:500;font-size:14px;letter-spacing:0;}
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
 
@@ -1133,6 +1152,42 @@
         <a href="tel:+37069046108" class="cbtn">☎ +370 690 46108</a>
         <a href="https://t.me/dvo8888" class="cbtn" target="_blank" rel="noopener">Telegram @dvo8888</a>
       </div>
+
+      <div class="leadform-wrap reveal">
+        <div class="divider-or">or leave a request</div>
+        <form class="leadform" method="POST" action="/api/lead">
+          <input type="hidden" name="lang" value="en">
+          <input type="hidden" name="page" value="/en/">
+          <div class="hp-field" aria-hidden="true">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="lead-name">Name *</label>
+            <input type="text" id="lead-name" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="lead-email">Email *</label>
+            <input type="email" id="lead-email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="lead-phone">Phone / WhatsApp</label>
+            <input type="tel" id="lead-phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="lead-message">Message</label>
+            <textarea id="lead-message" name="message" rows="4"></textarea>
+          </div>
+          <label class="consent">
+            <input type="checkbox" name="consent" required>
+            <span>I agree to the processing of my personal data under the <a href="/en/privacy.html" target="_blank" rel="noopener">privacy policy</a> *</span>
+          </label>
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAFENqJTy18lTOjgC"></div>
+          <button type="submit" class="submit-btn">Send request</button>
+          <p class="form-note">We reply within 24 hours.</p>
+        </form>
+      </div>
+
       <p class="fine">This material is for informational purposes only. Namibia's immigration and tax laws can change — for up-to-date information, please get in touch for a consultation.</p>
     </div>
     <div class="heroimg reveal" style="margin-top:var(--spacing-64);">
@@ -1316,6 +1371,7 @@
   });
 })();
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "497b9c261d074026a52581ac500495d8"}'></script>
 </body>
 </html>
