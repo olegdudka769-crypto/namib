@@ -154,6 +154,7 @@
   .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto;}
   .burger span{width:22px;height:1.5px;background:var(--color-carbon-ink);}
   header.on-hero .burger span{background:#fff;}
+  header.at-contact nav.mainnav a.navcta{outline:2px solid rgba(255,255,255,.4);outline-offset:2px;}
   #mobilenav{display:none;}
 
   /* ---------- sections generic ---------- */
@@ -381,10 +382,12 @@
   #cta .eyebrow{color:rgba(255,255,255,.85);}
   #cta .sub{font-size:18px;line-height:1.56;color:rgba(255,255,255,.85);max-width:560px;margin:20px auto 0;}
   #cta .we-help{margin:34px auto 0;max-width:520px;}
-  #cta .checklist li{color:rgba(255,255,255,.85);}
-  #cta .checklist li::before{color:#fff;}
-  #cta .contact-row{margin-top:40px;padding-top:0;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
-  .cbtn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-sans);font-weight:500;font-size:16px;letter-spacing:0;padding:14px 22px;border-radius:var(--radius-buttons);text-decoration:none;border:1px solid #fff;color:#fff;}
+  #cta .checklist{text-align:center;}
+  #cta .checklist li{color:rgba(255,255,255,.85);padding-left:0;}
+  #cta .checklist li::before{position:static;display:inline;margin-right:.5em;color:#fff;}
+  #cta .contact-row{margin-top:40px;padding-top:0;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .cbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--font-sans);font-weight:500;font-size:16px;letter-spacing:0;padding:14px 22px;border-radius:var(--radius-buttons);text-decoration:none;border:1px solid #fff;color:#fff;}
+  #cta .cbtn{width:100%;max-width:420px;}
   .cbtn.primary{background:#fff;color:#1a1a1a;border-color:#fff;}
   .fine{margin:26px auto 0;font-size:14px;color:rgba(255,255,255,.7);line-height:1.56;max-width:640px;}
   #cta .divider-or{color:rgba(255,255,255,.6);}
@@ -394,6 +397,9 @@
   #cta .leadform .consent a{color:#fff;}
   #cta .leadform .form-note{color:rgba(255,255,255,.6);}
   #cta .leadform .submit-btn{background:#fff;color:#1a1a1a;}
+  @media (max-width:768px){
+    #cta .cbtn{max-width:100%;}
+  }
 
   /* ---------- lead form ---------- */
   .leadform-wrap{margin:40px auto 0;max-width:560px;text-align:left;}
@@ -1286,15 +1292,29 @@
   /* scroll-spy */
   var navLinks = document.querySelectorAll('nav.mainnav a[data-nav]');
   var sections = Array.prototype.map.call(navLinks, function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
+  var ctaSection = document.getElementById('cta');
   var spy = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
         var id = '#' + e.target.id;
         navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === id); });
+        header.classList.toggle('at-contact', id === '#cta');
       }
     });
   }, {rootMargin:'-45% 0px -50% 0px'});
   sections.forEach(function(s){ spy.observe(s); });
+  if(ctaSection) spy.observe(ctaSection);
+
+  /* edge case: at the very bottom of the page, always treat as "in contacts" */
+  function checkContactBottom(){
+    var atBottom = (window.scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 4);
+    if(atBottom){
+      navLinks.forEach(function(a){ a.classList.remove('active'); });
+      header.classList.add('at-contact');
+    }
+  }
+  document.addEventListener('scroll', checkContactBottom, {passive:true});
+  checkContactBottom();
 
   /* lazy background video: load + play only while in view, pause when off-screen */
   var lazyVideos = document.querySelectorAll('.lazy-video');
